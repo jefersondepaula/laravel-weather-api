@@ -1,66 +1,78 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Weather API
+A simple Laravel-based weather API that fetches current weather information. The project uses JWT for authentication and interacts with an external weather service.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Table of Contents
+- Installation
+- Usage
+- Authentication
+- Fetching Weather Information
+- Testing with Postman or Insomnia
 
-## About Laravel
+## Installation
+1.    ```bash
+      git clone https://github.com/jefersondepaula/laravel-weather-api.git
+      cd laravel-weather-api
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Set Up Environment Variables
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Add the following keys to your .env file:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+env
+Copy code 
+```bash
+WEATHER_API_KEY=3990392534b149a2854113602232507
+JWT_SECRET=cDjkOYXs9cAvUoWbfMTwGRO2quPky3XqLTQYuVPHMYrR4yjvhpXFQOlEeQlIK7UG
+```
 
-## Learning Laravel
+## Create a User in the Database
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Run the command to seed the database and create a user:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+Copy code
+php artisan db:seed
+The created user:
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+*Email: test@test.com*
+*Password: password*
 
-## Laravel Sponsors
+## Usage
+-- Testing with Postman or Insomnia
+-- Authenticate by sending a POST request to the login endpoint:
+```
+http://127.0.0.1:8000/api/login
+```
+## Header:
+```bash
+Content-Type: application/x-www-form-urlencoded
+Body:
+email: test@test.com
+password: password
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+![image](https://github.com/jefersondepaula/laravel-weather-api/assets/55894519/7adb88b8-d0e0-4f82-8b1b-b16aef931653)
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Copy the JWT token from the response.
+```bash
+Send a POST request to the weather endpoint at http://127.0.0.1:8000/api/weather:
+```
 
-## Contributing
+## Header:
+```
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer <jwt> (Replace <jwt> with the copied JWT token)
+Form parameter: location with the desired location's value.
+Execute the request to fetch the weather information for the specified location.
+```
+![image](https://github.com/jefersondepaula/laravel-weather-api/assets/55894519/0e680dcd-e701-402a-8520-3faa10c6d734)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+location: The desired location for weather information.
+Testing with Postman or Insomnia
+Please follow the instructions in the Usage section to test the endpoints.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Authenticate to obtain the JWT token.
+Use the JWT token in the Authorization header when fetching weather information.
+![image](https://github.com/jefersondepaula/laravel-weather-api/assets/55894519/c5efd359-333a-4eb3-a5d3-2a001268d7cd)
